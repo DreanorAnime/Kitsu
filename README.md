@@ -1,1 +1,1 @@
-#Kitsu API
+# Kitsu API

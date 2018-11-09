@@ -16,5 +16,11 @@ namespace Kitsu.Api
             var json = await Kitsu.Client.GetStringAsync(next);
             return JsonConvert.DeserializeObject(json);
         }
+
+        public static async Task<dynamic> GetAnime(int animeId)
+        {
+            var json = await Kitsu.Client.GetStringAsync($"{Kitsu.BaseUri}/anime/{animeId}");
+            return JsonConvert.DeserializeObject(json);
+        }
     }
 }

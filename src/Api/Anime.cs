@@ -8,6 +8,12 @@ namespace Kitsu.Api
         public static async Task<dynamic> GetSeason(Season season, int year)
         {
             var json = await Kitsu.Client.GetStringAsync($"{Kitsu.BaseUri}/anime?filter[seasonYear]={year}&filter[season]={season}&page[limit]=20&page[offset]=0");
+
+            if (season == Season.year)
+            {
+                json = await Kitsu.Client.GetStringAsync($"{Kitsu.BaseUri}/anime?filter[seasonYear]={year}&page[limit]=20&page[offset]=0");
+            }
+            
             return JsonConvert.DeserializeObject(json);
         }
 

@@ -6,6 +6,7 @@
         summer,
         winter,
         spring,
-        fall
+        fall,
+        year
     }
 }

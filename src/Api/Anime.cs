@@ -5,11 +5,13 @@ namespace Kitsu.Api
 {
     public class Anime
     {
-        public static async Task<dynamic> GetSeason(Season season, int year)
+        public static async Task<dynamic> GetSeason(Season season, int year, string customFilter = null)
         {
-            var json = await Kitsu.Client.GetStringAsync($"{Kitsu.BaseUri}/anime?filter[seasonYear]={year}&filter[season]={season}&page[limit]=20&page[offset]=0");
+            var filter = !string.IsNullOrWhiteSpace(customFilter) ? customFilter : $"?filter[seasonYear]={year}&filter[season]={season}";
+            
+            var json = await Kitsu.Client.GetStringAsync($"{Kitsu.BaseUri}/anime{filter}&page[limit]=20&page[offset]=0");
 
-            if (season == Season.year)
+            if (season == Season.year && !string.IsNullOrWhiteSpace(customFilter))
             {
                 json = await Kitsu.Client.GetStringAsync($"{Kitsu.BaseUri}/anime?filter[seasonYear]={year}&page[limit]=20&page[offset]=0");
             }
